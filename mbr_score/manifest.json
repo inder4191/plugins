@@ -1,0 +1,34 @@
+{
+    "name": "MBR Score Calculator",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "MBR Score Calculator",
+    "background": {
+        "scripts": [
+                        "lib/jquery-3.3.1.min.js",
+                        "js/background.js",
+                        "js/content_v2.min.js",
+                        "js/rating.min.js"
+                   ]
+    },
+    "content_scripts" : [{
+         "matches" : [
+                      "https://performancemanager10.successfactors.com/acme*",
+                      "https://performancemanager10.successfactors.com/sf/pmreview*",
+                      "https://performancemanager10.successfactors.com/tgmEdit*"
+                     ],
+         "js" : [
+                    "lib/jquery-3.3.1.min.js",
+                    "js/content_v2.min.js",
+                    "js/rating.min.js"
+                ],
+         "run_at" : "document_end"
+     }],
+    "permissions": [
+        "activeTab"
+    ],
+    "browser_action":{
+        "default_title" : "MBR Score Calculator",
+        "default_icon" : "ext_icon.png"
+    }
+  }
