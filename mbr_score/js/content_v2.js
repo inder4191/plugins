@@ -7,7 +7,7 @@
 var WEIGHTAGE_KEY = "Weightage";
 var RATING_KEY = "Rating";
 
-var MBR_SCORE_ELEM = $("div h2[title='MBR Annual Score']").parent().siblings("div").find("div[class='HRContentCell'] input");
+var MBR_SCORE_ELEM = $("div h2[title='MBR Annual Score']").parent().siblings("div").find("div[class='HRContentCell']");
 var CURRENT_STEP = "sfcurrentstep"; 
 
 function getData() { 
@@ -46,11 +46,17 @@ function calculateScore(dataArray){
     dataArray.forEach(element => {
         /* console.log(element); */
         /* Calculation logic to be written */
-        mbr_score += (element.RATING_KEY * element.WEIGHTAGE_KEY)/100 ;
+        mbr_score += ((element.RATING_KEY || 0) * (element.WEIGHTAGE_KEY || 0))/100 ;
         
     });
-    MBR_SCORE_ELEM.prop("readonly", true);
-    MBR_SCORE_ELEM.val(mbr_score.toFixed(2));
+    //MBR_SCORE_ELEM.prop("readonly", true);
+    //MBR_SCORE_ELEM.val(mbr_score.toFixed(2));
+	if(MBR_SCORE_ELEM) {
+		//MBR_SCORE_ELEM.html(mbr_score.toFixed(2));
+	}else {
+		//var row = $("div h2[title='MBR Annual Score']").parent().find('.rowVT');
+		//row.append('<td><div class="HRContentCell">sou'+mbr_score.toFixed(2)+'</div></td>')
+	}
 };
 
 $(document).ready(function(){

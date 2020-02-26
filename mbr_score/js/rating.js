@@ -160,13 +160,23 @@ $(document).ready(function(){
 			$(row).find("td").find("input").attr("data-identifier", "goal-rating");
 		}		
 	});
-	
-	$("input[data-identifier='goal-rating']").attr("value", calculateRating(data));
-	$("input[data-identifier='goal-rating']").attr("readonly", true);
+	var hiddenField = $('#fbo5_edit0_xcustom2');
+	var setVal = calculateRating(data);
+	console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",setVal)
+	if(hiddenField){
+	hiddenField.attr("value", setVal);
+	hiddenField.parent().find('label').html(setVal);
+	}
+	//$("input[data-identifier='goal-rating']").attr("readonly", true);
 	
 	$("input[data-type='user-input']").keyup(function(){
 		console.log("user entered data...");
 		data.GOAL_ACHIEVEMENT = parseFloat($(this).val());
-		$("input[data-identifier='goal-rating']").attr("value", calculateRating(data));
+		var setVal = calculateRating(data);
+		if(hiddenField){
+		hiddenField.attr("value", setVal);
+		hiddenField.parent().find('label').html(setVal);
+		}
+		//$("input[data-identifier='goal-rating']").attr("value", calculateRating(data));
 	});
 });
