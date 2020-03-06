@@ -53,6 +53,7 @@ function calculateScore(dataArray){
     MBR_SCORE_ELEM.val(mbr_score.toFixed(2));
 };
 
+
 $(document).ready(function(){
     console.log("Already Saved MBR Score :: ",MBR_SCORE_ELEM.val());
     var routeMapDiv = $("div#routeMap");
@@ -66,3 +67,110 @@ $(document).ready(function(){
         console.log("Form NOT in MBR Annual Review step...");
     }    
 });
+
+function calcltePostveRatngWithTarget(data) {
+	var rating;
+	if(data.GOAL_ACHIEVEMENT < data.GOAL_BUDGET) {
+		rating = 0;
+	} else if(data.GOAL_ACHIEVEMENT === data.GOAL_BUDGET) {
+		rating = 1;
+	} else if(data.GOAL_ACHIEVEMENT === data.GOAL_OUTSTANDING) {
+		rating = 3;
+	} else if(data.GOAL_ACHIEVEMENT >= data.GOAL_TARGET_FOR_SCORE) {
+		rating = 4;
+	} else if((data.GOAL_ACHIEVEMENT>data.GOAL_BUDGET) 
+				&& (data.GOAL_ACHIEVEMENT<data.GOAL_OUTSTANDING)) {
+		rating =  1 + (2 * ((data.GOAL_ACHIEVEMENT-data.GOAL_BUDGET)/(data.GOAL_OUTSTANDING-data.GOAL_BUDGET)));
+	} else if((data.GOAL_ACHIEVEMENT>data.GOAL_OUTSTANDING) 
+		&& (data.GOAL_ACHIEVEMENT<data.GOAL_TARGET_FOR_SCORE)) {
+		rating =  3 + ((data.GOAL_ACHIEVEMENT-data.GOAL_OUTSTANDING)/(data.GOAL_TARGET_FOR_SCORE-data.GOAL_OUTSTANDING));
+	} 
+    /*console.log("Calculated Rating ::", rating.toFixed(2));*/
+	return rating.toFixed(2);
+}
+
+function calclteNegtveRatngWithTarget(data) {
+	var rating;
+	if(data.GOAL_ACHIEVEMENT > data.GOAL_BUDGET) {
+		rating = 0;
+	} else if(data.GOAL_ACHIEVEMENT === data.GOAL_BUDGET) {
+		rating = 1;
+	} else if(data.GOAL_ACHIEVEMENT === data.GOAL_OUTSTANDING) {
+		rating = 3;
+	} else if(data.GOAL_ACHIEVEMENT <= data.GOAL_TARGET_FOR_SCORE) {
+		rating = 4;
+	} else if((data.GOAL_ACHIEVEMENT<data.GOAL_BUDGET) 
+				&& (data.GOAL_ACHIEVEMENT>data.GOAL_OUTSTANDING)) {
+		rating =  1 + (2 * ((data.GOAL_ACHIEVEMENT-data.GOAL_BUDGET)/(data.GOAL_OUTSTANDING-data.GOAL_BUDGET)));
+	} else if((data.GOAL_ACHIEVEMENT<data.GOAL_OUTSTANDING) 
+		&& (data.GOAL_ACHIEVEMENT>data.GOAL_TARGET_FOR_SCORE)) {
+		rating =  3 + ((data.GOAL_ACHIEVEMENT-data.GOAL_OUTSTANDING)/(data.GOAL_TARGET_FOR_SCORE-data.GOAL_OUTSTANDING));
+	} 
+    /*console.log("Calculated Rating ::", rating.toFixed(2));*/
+	return rating.toFixed(2);
+}
+function calcltePostveRatngWithoutTarget(data) {
+	var rating;
+	if(data.GOAL_ACHIEVEMENT < data.GOAL_BUDGET) {
+		rating = 0;
+	} else if(data.GOAL_ACHIEVEMENT === data.GOAL_BUDGET) {
+		rating = 1;
+	} else if(data.GOAL_ACHIEVEMENT === data.GOAL_OUTSTANDING) {
+		rating = 3;
+	} else if(data.GOAL_ACHIEVEMENT > data.GOAL_OUTSTANDING) {
+		rating = 4;
+	} else if((data.GOAL_ACHIEVEMENT>data.GOAL_BUDGET) 
+				&& (data.GOAL_ACHIEVEMENT<data.GOAL_OUTSTANDING)) {
+		rating =  1 + (2 * ((data.GOAL_ACHIEVEMENT-data.GOAL_BUDGET)/(data.GOAL_OUTSTANDING-data.GOAL_BUDGET)));
+	} 
+    /*console.log("Calculated Rating ::", rating.toFixed(2));*/
+	return rating.toFixed(2);
+}
+function calclteNegtveRatngWithoutTarget(data) {
+	var rating;
+	if(data.GOAL_ACHIEVEMENT > data.GOAL_BUDGET) {
+		rating = 0;
+	} else if(data.GOAL_ACHIEVEMENT === data.GOAL_BUDGET) {
+		rating = 1;
+	} else if(data.GOAL_ACHIEVEMENT === data.GOAL_OUTSTANDING) {
+		rating = 3;
+	} else if(data.GOAL_ACHIEVEMENT < data.GOAL_OUTSTANDING) {
+		rating = 4;
+	} else if((data.GOAL_ACHIEVEMENT>data.GOAL_OUTSTANDING) 
+				&& (data.GOAL_ACHIEVEMENT<data.GOAL_BUDGET)) {
+		rating =  1 + (2 * ((data.GOAL_ACHIEVEMENT-data.GOAL_BUDGET)/(data.GOAL_OUTSTANDING-data.GOAL_BUDGET)));
+	} 
+    /*console.log("Calculated Rating ::", rating.toFixed(2));*/
+	return rating.toFixed(2);
+}
+
+function calculateRating(data){
+	if(null==data.GOAL_ACHIEVEMENT || isNaN(data.GOAL_ACHIEVEMENT)){
+		return "";
+	}
+
+	/*console.log("User input :", data.GOAL_ACHIEVEMENT);*/
+
+	/* check if GOAL_TARGET_FOR_SCORE exist */
+	var functionSelector = data.GOAL_OUTSTANDING - data.GOAL_BUDGET;
+	if(data.hasOwnProperty('GOAL_TARGET_FOR_SCORE') && null!=data.GOAL_TARGET_FOR_SCORE
+		 											&& !isNaN(data.GOAL_TARGET_FOR_SCORE)) {
+		console.log(GOAL_TARGET_FOR_SCORE + " : ", data.GOAL_TARGET_FOR_SCORE);
+		if(functionSelector > 0) {
+			/* Target exists and its increasing */
+			return calcltePostveRatngWithTarget(data);
+		} else if(functionSelector < 0)  {
+			/* Target exists and its decreasing */
+			return calclteNegtveRatngWithTarget(data);
+		}
+	} else {
+		console.log(GOAL_TARGET_FOR_SCORE + " does not exist or null or NaN : ", data);
+		if(functionSelector > 0) {
+			/* Target does not exist and its increasing */
+			return calcltePostveRatngWithoutTarget(data);
+		} else if(functionSelector < 0)  {
+			/* Target does not exist and its decreasing */
+			return calclteNegtveRatngWithoutTarget(data);
+		}
+	}
+};
