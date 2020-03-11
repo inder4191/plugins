@@ -69,11 +69,11 @@ function placeRating() {
         
     }
     var valueToPlace = autoManualDeciderString.toString();
-    $('input[type=text]#wf_sect_10_e_ele_30').val(actual_rating.toString()).attr("disabled", true);
-    $('input[type=text]#wf_sect_10_e_ele_41').val(valueToPlace).attr("disabled", true);
+    $('input[type=text]#wf_sect_10_e_ele_30').val(actual_rating.toString()).attr("readonly", true);
+    $('input[type=text]#wf_sect_10_e_ele_41').val(valueToPlace).attr("readonly", true);
     
     var actual_mbr_annual_score = actual_score_Calculation(Data_Arr);
-    $('input[type=text]#wf_sect_10_e_2').val(actual_mbr_annual_score).attr("disabled", true);
+    $('input[type=text]#wf_sect_10_e_2').val(actual_mbr_annual_score).attr("readonly", true);
     
 
     var annual_score_ref = $("div h2[title='MBR Annual Score']").parent().siblings("div").find("div[class='HRContentCell']")
@@ -83,7 +83,7 @@ function placeRating() {
     else{
         mbr_status.push("MANUAL");
     }
-    $('input[type=text]#wf_sect_10_e_ele_23').val(mbr_status.toString()).attr("disabled", true)
+    $('input[type=text]#wf_sect_10_e_ele_23').val(mbr_status.toString()).attr("readonly", true)
 }
 
 
