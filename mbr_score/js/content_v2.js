@@ -57,12 +57,12 @@ $(document).ready(function(){
     console.log("Already Saved MBR Score :: ",MBR_SCORE_ELEM.val());
     var routeMapDiv = $("div#routeMap");
     var mbrAnnualReviewStep =$(routeMapDiv).find("div[title='MBR Annual Review']");
-    var mbrAnnualReviewClass = $(mbrAnnualReviewStep).attr("class");
+    //var mbrAnnualReviewClass = $(mbrAnnualReviewStep).attr("class");
     /* console.log("MBR Annual Review step class...", mbrAnnualReviewClass.toLowerCase()); */
-    if(mbrAnnualReviewClass.toLowerCase().indexOf(CURRENT_STEP) != -1) {
+    //if(mbrAnnualReviewClass.toLowerCase().indexOf(CURRENT_STEP) != -1) {
         console.log("Form in MBR Annual Review step...");
         calculateScore(getData());
-    } else {
-        console.log("Form NOT in MBR Annual Review step...");
-    }    
+    //} else {
+        //console.log("Form NOT in MBR Annual Review step...");
+    //}    
 });
