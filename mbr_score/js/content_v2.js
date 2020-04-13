@@ -189,14 +189,14 @@ function calculate_Rating(data){
 $(document).ready(function(){
     console.log("Already Saved MBR Score :: ",MBR_SCORE_ELEM.val());
     var routeMapDiv = $("div#routeMap");
-    var mbrAnnualReviewStep =$(routeMapDiv).find("div[title='MBR Annual Review']");
-    var mbrAnnualReviewClass = $(mbrAnnualReviewStep).attr("class");
-    if(mbrAnnualReviewClass.toLowerCase().indexOf(CURRENT_STEP) != -1) {
-        console.log("Form in MBR Annual Review step...");
+    //var mbrAnnualReviewStep =$(routeMapDiv).find("div[title='MBR Annual Review']");
+    //var mbrAnnualReviewClass = $(mbrAnnualReviewStep).attr("class");
+    //if(mbrAnnualReviewClass.toLowerCase().indexOf(CURRENT_STEP) != -1) {
+        //console.log("Form in MBR Annual Review step...");
         calculateScore(getData());
-    } else {
-        console.log("Form NOT in MBR Annual Review step...");
-    }  
+    // } else {
+    //     console.log("Form NOT in MBR Annual Review step...");
+    // }  
     
     Data_Arr = [];
     var goals=$('.tabbox')
