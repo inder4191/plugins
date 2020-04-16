@@ -90,7 +90,7 @@ function calclteNegtveRatngWithoutTarget(data) {
 }
 
 function calculateRating(data){
-	if(null==data.GOAL_ACHIEVEMENT || isNaN(data.GOAL_ACHIEVEMENT)){
+	if(null==data.GOAL_ACHIEVEMENT || isNaN(data.GOAL_ACHIEVEMENT)){  
 		return "";
 	}
 
