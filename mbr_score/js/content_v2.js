@@ -230,7 +230,7 @@ $(document).ready(function(){
             }
             else if(key === 'Rating'){
                 data.GOAL_RATING_KEY = Number(val)
-            }else if(key === "Enter rating between 0 to 4") {
+            }else if(key === "Calculated Rating") {
                 existingRating.push(Number(val))
             }else if(key === "Weightage") {
                 var splitArr = val.split("%");
