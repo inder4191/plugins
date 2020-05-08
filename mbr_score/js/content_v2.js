@@ -222,7 +222,7 @@ $(document).ready(function(){
             else if(key === 'Outstanding'){
                 data.GOAL_OUTSTANDING = Number(val)
             }
-            else if(key === 'Target for a Score of 4'){
+            else if(key === 'Target for a Score of 4 (if applicable)'){
                 data.GOAL_TARGET_FOR_SCORE = Number(val)
             }
             else if(key === 'Achievement so far'){
