@@ -43,7 +43,7 @@ function getData() {
 function actual_score_Calculation(dataArray) {
     var mbr_score = 0;
     dataArray.forEach(element => {
-    mbr_score += ((element.RATING_KEY || element.GOAL_RATING_KEY) * (element.WEIGHTAGE_KEY || element.GOAL_WEIGHTAGE_KEY))/100 ;
+    mbr_score += ((element.RATING_KEY || element.GOAL_RATING_KEY || 0) * (element.WEIGHTAGE_KEY || element.GOAL_WEIGHTAGE_KEY || 0))/100 ;
      });
     return mbr_score.toFixed(2);
 }
@@ -161,8 +161,8 @@ function calculateNegativeRatingWithoutTarget(data) {
 }
 
 function calculate_Rating(data){
-	if(null==data.GOAL_ACHIEVEMENT || isNaN(data.GOAL_ACHIEVEMENT)){
-		return "";
+	if(!data.GOAL_ACHIEVEMENT || isNaN(data.GOAL_ACHIEVEMENT)){
+		return 0;
 	}
     var functionSelector = data.GOAL_OUTSTANDING - data.GOAL_BUDGET;
 	if(data.hasOwnProperty('GOAL_TARGET_FOR_SCORE') && null!=data.GOAL_TARGET_FOR_SCORE
@@ -217,24 +217,24 @@ $(document).ready(function(){
             console.log(key, val)
 
             if(key === "Budget") {
-                data.GOAL_BUDGET = Number(val)
+                data.GOAL_BUDGET = Number(val) || 0;
             }
             else if(key === 'Outstanding'){
-                data.GOAL_OUTSTANDING = Number(val)
+                data.GOAL_OUTSTANDING = Number(val) || 0;
             }
-            else if(key === 'Target for a Score of 4 (if applicable)'){
-                data.GOAL_TARGET_FOR_SCORE = Number(val)
+            else if(key === 'Target for a Score of 4(if applicable)'){
+                data.GOAL_TARGET_FOR_SCORE = Number(val) || 0;
             }
             else if(key === 'Achievement so far'){
-                data.GOAL_ACHIEVEMENT = Number(val)
+                data.GOAL_ACHIEVEMENT = Number(val) || 0;
             }
             else if(key === 'Rating'){
-                data.GOAL_RATING_KEY = Number(val)
+                data.GOAL_RATING_KEY = Number(val) || 0;
             }else if(key === "Calculated Rating") {
-                existingRating.push(Number(val))
+                existingRating.push(Number(val) || 0)
             }else if(key === "Weightage") {
                 var splitArr = val.split("%");
-                data.GOAL_WEIGHTAGE_KEY = Number(splitArr[0])
+                data.GOAL_WEIGHTAGE_KEY = Number(splitArr[0]) || 0;
             }
         }
         Data_Arr.push(data);
