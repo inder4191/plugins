@@ -28,7 +28,6 @@ function calcltePostveRatngWithTarget(data) {
 		&& (data.GOAL_ACHIEVEMENT<data.GOAL_TARGET_FOR_SCORE)) {
 		rating =  3 + ((data.GOAL_ACHIEVEMENT-data.GOAL_OUTSTANDING)/(data.GOAL_TARGET_FOR_SCORE-data.GOAL_OUTSTANDING));
 	} 
-    /*console.log("Calculated Rating ::", rating.toFixed(2));*/
 	return rating.toFixed(2);
 }
 
@@ -49,7 +48,6 @@ function calclteNegtveRatngWithTarget(data) {
 		&& (data.GOAL_ACHIEVEMENT>data.GOAL_TARGET_FOR_SCORE)) {
 		rating =  3 + ((data.GOAL_ACHIEVEMENT-data.GOAL_OUTSTANDING)/(data.GOAL_TARGET_FOR_SCORE-data.GOAL_OUTSTANDING));
 	} 
-    /*console.log("Calculated Rating ::", rating.toFixed(2));*/
 	return rating.toFixed(2);
 }
 
@@ -67,7 +65,6 @@ function calcltePostveRatngWithoutTarget(data) {
 				&& (data.GOAL_ACHIEVEMENT<data.GOAL_OUTSTANDING)) {
 		rating =  1 + (2 * ((data.GOAL_ACHIEVEMENT-data.GOAL_BUDGET)/(data.GOAL_OUTSTANDING-data.GOAL_BUDGET)));
 	} 
-    /*console.log("Calculated Rating ::", rating.toFixed(2));*/
 	return rating.toFixed(2);
 }
 
@@ -85,7 +82,6 @@ function calclteNegtveRatngWithoutTarget(data) {
 				&& (data.GOAL_ACHIEVEMENT<data.GOAL_BUDGET)) {
 		rating =  1 + (2 * ((data.GOAL_ACHIEVEMENT-data.GOAL_BUDGET)/(data.GOAL_OUTSTANDING-data.GOAL_BUDGET)));
 	} 
-    /*console.log("Calculated Rating ::", rating.toFixed(2));*/
 	return rating.toFixed(2);
 }
 
@@ -94,13 +90,10 @@ function calculateRating(data){
 		return "";
 	}
 
-	/*console.log("User input :", data.GOAL_ACHIEVEMENT);*/
-
 	/* check if GOAL_TARGET_FOR_SCORE exist */
 	var functionSelector = data.GOAL_OUTSTANDING - data.GOAL_BUDGET;
 	if(data.hasOwnProperty('GOAL_TARGET_FOR_SCORE') && null!=data.GOAL_TARGET_FOR_SCORE
 		 											&& !isNaN(data.GOAL_TARGET_FOR_SCORE)) {
-		console.log(GOAL_TARGET_FOR_SCORE + " : ", data.GOAL_TARGET_FOR_SCORE);
 		if(functionSelector > 0) {
 			/* Target exists and its increasing */
 			return calcltePostveRatngWithTarget(data);
@@ -109,7 +102,6 @@ function calculateRating(data){
 			return calclteNegtveRatngWithTarget(data);
 		}
 	} else {
-		console.log(GOAL_TARGET_FOR_SCORE + " does not exist or null or NaN : ", data);
 		if(functionSelector > 0) {
 			/* Target does not exist and its increasing */
 			return calcltePostveRatngWithoutTarget(data);
@@ -132,27 +124,20 @@ $(document).ready(function(){
 	$.each(fieldRows, function(index, row) {
 		var label = $(row).find("th").find("label").text();
         var value = 0.0;
-		if(-1 != label.indexOf(GOAL_BUDGET)){
-			console.log("label : ",label);			
+		if(-1 != label.indexOf(GOAL_BUDGET)){		
 			value = $(row).find("td").find("label").html();
-			console.log("value : ",value);
 			data.GOAL_BUDGET = parseFloat(value.replace("%", ""));
 		}
 		else if(-1 != label.indexOf(GOAL_OUTSTANDING)){
-			console.log("label : ",label);
 			value = $(row).find("td").find("label").html();
-			console.log("value : ",value);
 			data.GOAL_OUTSTANDING = parseFloat(value);
 		}
 		else if(-1 != label.indexOf(GOAL_TARGET_FOR_SCORE)){
-			console.log("label : ",label);
 			value = $(row).find("td").find("label").html();
-			console.log("value : ",value);
 			data['GOAL_TARGET_FOR_SCORE'] = parseFloat(value);
 		}
 		else if(-1 != label.indexOf(GOAL_ACHIEVEMENT)){ 
 			value = $(row).find("td").find("input").val();
-			console.log("Achievement so far value : ",value);
 			data.GOAL_ACHIEVEMENT = parseFloat(value);
 			$(row).find("td").find("input").attr("data-type", "user-input");
 		}
@@ -165,7 +150,6 @@ $(document).ready(function(){
 	$("input[data-identifier='goal-rating']").attr("readonly", true);
 	
 	$("input[data-type='user-input']").keyup(function(){
-		console.log("user entered data...");
 		data.GOAL_ACHIEVEMENT = parseFloat($(this).val());
 		$("input[data-identifier='goal-rating']").attr("value", calculateRating(data));
 	});

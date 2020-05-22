@@ -24,9 +24,7 @@
                 ],
          "run_at" : "document_end"
      }],
-    "permissions": [
-        "activeTab"
-    ],
+    "permissions": [],
     "browser_action":{
         "default_title" : "MBR Score Calculator",
         "default_icon" : "ext_icon.png"

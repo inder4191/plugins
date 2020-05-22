@@ -167,7 +167,6 @@ function calculate_Rating(data){
     var functionSelector = data.GOAL_OUTSTANDING - data.GOAL_BUDGET;
 	if(data.hasOwnProperty('GOAL_TARGET_FOR_SCORE') && null!=data.GOAL_TARGET_FOR_SCORE
 		 											&& !isNaN(data.GOAL_TARGET_FOR_SCORE)) {
-		console.log(GOAL_TARGET_FOR_SCORE + " : ", data.GOAL_TARGET_FOR_SCORE);
 		if(functionSelector > 0) {
 			/* Target exists and its increasing */
 			return calculatePositiveRatngWithTarget(data);
@@ -176,7 +175,6 @@ function calculate_Rating(data){
 			return calculateNegativeRatngWithTarget(data);
 		}
 	} else {
-		console.log(GOAL_TARGET_FOR_SCORE + " does not exist or null or NaN : ", data);
 		if(functionSelector > 0) {
 			/* Target does not exist and its increasing */
 			return calculatePositveRatingWithoutTarget(data);
@@ -187,16 +185,8 @@ function calculate_Rating(data){
 	}
 };
 $(document).ready(function(){
-    console.log("Already Saved MBR Score :: ",MBR_SCORE_ELEM.val());
     var routeMapDiv = $("div#routeMap");
-    //var mbrAnnualReviewStep =$(routeMapDiv).find("div[title='MBR Annual Review']");
-    //var mbrAnnualReviewClass = $(mbrAnnualReviewStep).attr("class");
-    //if(mbrAnnualReviewClass.toLowerCase().indexOf(CURRENT_STEP) != -1) {
-        //console.log("Form in MBR Annual Review step...");
-        calculateScore(getData());
-    // } else {
-    //     console.log("Form NOT in MBR Annual Review step...");
-    // }  
+    calculateScore(getData());
     
     Data_Arr = [];
     var goals=$('.tabbox')
@@ -214,7 +204,6 @@ $(document).ready(function(){
             item=vals[i];
             var key =$(item).find('.lab').html();
             var val = $(item).find('.val').html();
-            console.log(key, val)
 
             if(key === "Budget") {
                 data.GOAL_BUDGET = Number(val) || 0;
