@@ -1,8 +1,9 @@
 {
     "name": "MBR Score Calculator",
-    "version": "1.0",
+    "version": "1.0.0",
     "manifest_version": 2,
-    "description": "MBR Score Calculator",
+    "icons": {"128": "icon_128.png"},
+    "description": "This extension calculates the various performance measures of an employee on certain parameters.",
     "background": {
         "scripts": [
                         "lib/jquery-3.3.1.min.js",
@@ -27,6 +28,6 @@
     "permissions": [],
     "browser_action":{
         "default_title" : "MBR Score Calculator",
-        "default_icon" : "ext_icon.png"
+        "default_icon" : "icon.png"
     }
   }
