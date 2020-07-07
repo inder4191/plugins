@@ -8,7 +8,7 @@
         "scripts": [
                         "lib/jquery-3.3.1.min.js",
                         "js/background.js",
-                        "js/content_v2.min.js",
+                        "js/content_v2.js",
                         "js/rating.min.js"
                    ]
     },
@@ -20,7 +20,7 @@
                      ],
          "js" : [
                     "lib/jquery-3.3.1.min.js",
-                    "js/content_v2.min.js",
+                    "js/content_v2.js",
                     "js/rating.min.js"
                 ],
          "run_at" : "document_end"

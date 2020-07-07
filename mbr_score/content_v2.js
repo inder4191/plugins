@@ -6,8 +6,10 @@
 
 var WEIGHTAGE_KEY = "Weightage";
 var RATING_KEY = "Rating";
+var annualScoreTitleArray = ['MBR Annual Score','Annual Score'];
 
 var MBR_SCORE_ELEM = $("div h2[title='MBR Annual Score']").parent().siblings("div").find("div[class='HRContentCell'] input");
+var annual_score_ref = $("div h2[title='MBR Annual Score']").parent().siblings("div").find("div[class='HRContentCell']");
 var CURRENT_STEP = "sfcurrentstep"; 
 
 function getData() { 
@@ -76,7 +78,7 @@ function placeRating() {
     $('input[type=text]#wf_sect_10_e_2').val(actual_mbr_annual_score).attr("readonly", true);
     
 
-    var annual_score_ref = $("div h2[title='MBR Annual Score']").parent().siblings("div").find("div[class='HRContentCell']")
+    
     if (actual_mbr_annual_score === $(annual_score_ref).html()){
         mbr_status.push("AUTOMATIC");
     }
@@ -184,8 +186,18 @@ function calculate_Rating(data){
 		}
 	}
 };
+function setAnnualAttributeRef(){
+    var ele = $("div h2");
+    for(var i=0;i<ele.length ; i++) {
+        if(annualScoreTitleArray.indexOf($(ele[i]).attr('title')) >= 0) {
+            MBR_SCORE_ELEM = $(ele[i]).parent().siblings("div").find("div[class='HRContentCell'] input");
+            annual_score_ref = $(ele[i]).parent().siblings("div").find("div[class='HRContentCell']");
+        }
+    }
+}
 $(document).ready(function(){
     var routeMapDiv = $("div#routeMap");
+    setAnnualAttributeRef();
     calculateScore(getData());
     
     Data_Arr = [];
