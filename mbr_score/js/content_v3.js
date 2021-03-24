@@ -72,7 +72,7 @@ function getDuration(totalScoreObj) {
         var value = $(row).find("div[class='HRContentCell']").html();
         if(label.indexOf("Timeline")>=0) {
             var durationTxt = value.substring(0, value.indexOf("Months"));
-            totalScoreObj.duration.push(parseInt(durationTxt));
+            totalScoreObj.duration.push(parseInt(durationTxt) || 0);
 
         }
     });
