@@ -101,7 +101,9 @@ function calculateScore(/* dataArray */ goalObj){
     getDuration(totalScoreObj);
     var totalDuration = 0, totalMbrScore = 0.0;
     $.each(totalScoreObj.duration, function(index, value) {
+        if(Number(totalScoreObj.indvMbrScore[index])) {
         totalDuration += value;
+        }
     });
     $.each(totalScoreObj.indvMbrScore, function(index, value) {
         //console.log('value : ', value);
