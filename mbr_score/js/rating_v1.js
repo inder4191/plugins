@@ -11,6 +11,11 @@ var GOAL_TARGET_FOR_SCORE = "Target for a Score";
 var GOAL_ACHIEVEMENT = "Achievement so far";
 var GOAL_RATING_KEY = "Calculated Rating";
 
+function truncateToDecimals(num, dec = 2) {
+	const calcDec = Math.pow(10, dec);
+	return Math.trunc(num * calcDec) / calcDec;
+  }
+
 function calcltePostveRatngWithTarget(data) {
 	var rating;
 	if(data.GOAL_ACHIEVEMENT < data.GOAL_BUDGET) {
@@ -28,7 +33,7 @@ function calcltePostveRatngWithTarget(data) {
 		&& (data.GOAL_ACHIEVEMENT<data.GOAL_TARGET_FOR_SCORE)) {
 		rating =  3 + ((data.GOAL_ACHIEVEMENT-data.GOAL_OUTSTANDING)/(data.GOAL_TARGET_FOR_SCORE-data.GOAL_OUTSTANDING));
 	} 
-	return rating.toFixed(2);
+	return truncateToDecimals(rating);
 }
 
 function calclteNegtveRatngWithTarget(data) {
