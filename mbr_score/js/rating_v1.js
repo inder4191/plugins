@@ -33,6 +33,7 @@ function calcltePostveRatngWithTarget(data) {
 		&& (data.GOAL_ACHIEVEMENT<data.GOAL_TARGET_FOR_SCORE)) {
 		rating =  3 + ((data.GOAL_ACHIEVEMENT-data.GOAL_OUTSTANDING)/(data.GOAL_TARGET_FOR_SCORE-data.GOAL_OUTSTANDING));
 	} 
+	console.log("rating:",rating)
 	return truncateToDecimals(rating);
 }
 
@@ -53,7 +54,8 @@ function calclteNegtveRatngWithTarget(data) {
 		&& (data.GOAL_ACHIEVEMENT>data.GOAL_TARGET_FOR_SCORE)) {
 		rating =  3 + ((data.GOAL_ACHIEVEMENT-data.GOAL_OUTSTANDING)/(data.GOAL_TARGET_FOR_SCORE-data.GOAL_OUTSTANDING));
 	} 
-	return rating.toFixed(2);
+	console.log("rating:",rating)
+	return truncateToDecimals(rating);
 }
 
 function calcltePostveRatngWithoutTarget(data) {
@@ -70,7 +72,8 @@ function calcltePostveRatngWithoutTarget(data) {
 				&& (data.GOAL_ACHIEVEMENT<data.GOAL_OUTSTANDING)) {
 		rating =  1 + (2 * ((data.GOAL_ACHIEVEMENT-data.GOAL_BUDGET)/(data.GOAL_OUTSTANDING-data.GOAL_BUDGET)));
 	} 
-	return rating.toFixed(2);
+	console.log("rating:",rating)
+	return truncateToDecimals(rating);
 }
 
 function calclteNegtveRatngWithoutTarget(data) {
@@ -87,7 +90,8 @@ function calclteNegtveRatngWithoutTarget(data) {
 				&& (data.GOAL_ACHIEVEMENT<data.GOAL_BUDGET)) {
 		rating =  1 + (2 * ((data.GOAL_ACHIEVEMENT-data.GOAL_BUDGET)/(data.GOAL_OUTSTANDING-data.GOAL_BUDGET)));
 	} 
-	return rating.toFixed(2);
+	console.log("rating:",rating)
+	return truncateToDecimals(rating);
 }
 
 function calculateRating(data){
